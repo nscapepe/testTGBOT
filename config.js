@@ -1,0 +1,22 @@
+require('dotenv').config();
+
+const CHANNEL = process.env.CHANNEL;
+const CHANNEL_URL = process.env.CHANNEL_URL;
+
+// Поддержка нескольких админов через запятую: ADMIN_ID=123456789,987654321
+const ADMIN_IDS = (process.env.ADMIN_ID || '')
+    .split(',')
+    .map((id) => id.trim())
+    .filter(Boolean)
+    .map(Number);
+
+function isAdmin(userId) {
+    return ADMIN_IDS.includes(userId);
+}
+
+module.exports = {
+    CHANNEL,
+    CHANNEL_URL,
+    ADMIN_IDS,
+    isAdmin,
+}
