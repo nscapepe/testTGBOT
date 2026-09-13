@@ -1,5 +1,12 @@
 const { Pool } = require('pg');
 
+console.log(
+    'DATABASE_URL:',
+    process.env.DATABASE_URL
+        ? process.env.DATABASE_URL.replace(/:[^:@]+@/, ':***@')
+        : 'НЕ ЗАДАНА (undefined)'
+);
+
 // Railway сам прокидывает DATABASE_URL, если в проекте подключён Postgres-плагин.
 // rejectUnauthorized: false нужен, т.к. Railway использует self-signed сертификат.
 const pool = new Pool({
